@@ -1,104 +1,109 @@
 import AppKit
 
-//private struct OffsetPosition: Hashable {
-//
-//    let x: Int
-//    let y: Int
-//
-//    static func == (lhs: OffsetPosition, rhs: OffsetPosition) -> Bool {
-//        return lhs.x == rhs.x && lhs.y == rhs.x
-//    }
-//
-//    var hashValue: Int {
-//        return x.hashValue & y.hashValue.byteSwapped
-//    }
-//
-//}
-//
-//private extension OffsetPosition {
-//
-//    init?(x: Int, y: Int, width: Int, height: Int) {
-//        guard x >= 0, y >= 0, x < width, y < height else {
-//            return nil
-//        }
-//        self.x = x
-//        self.y = y
-//    }
-//
-//}
+public enum Pattern {
+    case floydStienberg, atkinson, sierra
+
+    private var divisor: Float {
+        let divisor: Float
+        switch self {
+        case .floydStienberg: divisor = 16
+        case .atkinson: divisor = 8
+        case .sierra: divisor = 32
+        }
+        return divisor
+    }
+
+    fileprivate var pattern: [Point<Float>] {
+        let points: [Point<Float>]
+        switch self {
+        case .floydStienberg:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 7),
+                Point(xOff: -1, yOff: 1, error: 3),
+                Point(xOff: 0, yOff: 1, error: 5),
+                Point(xOff: 1, yOff: 1, error: 1),
+            ]
+        case .atkinson:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 1),
+                Point(xOff: 2, yOff: 0, error: 1),
+                Point(xOff: -1, yOff: 1, error: 1),
+                Point(xOff: 0, yOff: 1, error: 1),
+                Point(xOff: 1, yOff: 1, error: 1),
+                Point(xOff: 0, yOff: 2, error: 1),
+            ]
+        case .sierra:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 5),
+                Point(xOff: 2, yOff: 0, error: 3),
+                Point(xOff: -2, yOff: 1, error: 2),
+                Point(xOff: -1, yOff: 1, error: 4),
+                Point(xOff: 0, yOff: 1, error: 5),
+                Point(xOff: 1, yOff: 1, error: 4),
+                Point(xOff: 2, yOff: 1, error: 2),
+                Point(xOff: -1, yOff: 2, error: 2),
+                Point(xOff: 0, yOff: 2, error: 3),
+                Point(xOff: 1, yOff: 2, error: 2),
+            ]
+        }
+        return points
+    }
+
+    fileprivate func diffused(error: Float, x: Int, y: Int, width: Int, height: Int) -> [Point<Int16>] {
+        let errorPoint = error / divisor
+        return pattern.flatMap { initialPoint in
+            let finalX = x + initialPoint.xOff
+            let finalY = y + initialPoint.yOff
+            guard finalX >= 0, finalY >= 0, finalX < width, finalY < height else {
+                return nil
+            }
+            return Point(xOff: finalX, yOff: finalY, error: Int16(errorPoint * initialPoint.error))
+        }
+    }
+}
+
+private struct Point<Value> {
+    let xOff: Int, yOff: Int, error: Value
+}
 
 public extension CGContext {
 
-    public func dither(allowedColors: [RGBA]) {
+    public func dither(allowedColors: [RGBA], pattern: Pattern) {
         guard let bitmap = data else {
             fatalError()
         }
         let colors = bitmap.bindMemory(to: RGBA.self, capacity: width * height)
-        var offsets: [Int: [Int: Int16]] = [:]
-
+        let offsets = UnsafeMutablePointer<Int16>.allocate(capacity: width * height)
+        offsets.initialize(to: 0, count: width * height)
+        defer {
+            offsets.deinitialize()
+        }
         let rowWidth = (bytesPerRow / (bitsPerPixel / 8))
         for y in 0..<height {
             let rowOffset = rowWidth * y
+            let errorOffset = y * width
             for x in 0..<width {
                 let position = x + rowOffset
                 let baseColor: RGBA = colors[position]
                 let results: [ColorComparison]
-                if let currentOffset = offsets[x]?[y] {
+                let currentOffset = offsets[x + errorOffset]
+                if currentOffset != 0 {
                     results = allowedColors.map(ColorComparison.comparison(to: baseColor, offsetBy: currentOffset))
-                    offsets[x]?[y] = nil
                 }
                 else {
                     results = allowedColors.map(ColorComparison.comparison(to: baseColor))
                 }
                 let sorted = results.sorted(by: ColorComparison.sort)
-//              Floyd-Stienberg
-//                let errorFraction: Float = Float(sorted[0].difference) / 16
-//                let diffusion: [(Int, Int, Int16)] = [
-//                    (1, 0, Int16(errorFraction * 7)),
-//                    (-1, 1, Int16(errorFraction * 3)),
-//                    (0, 1, Int16(errorFraction * 5)),
-//                    (1, 1, Int16(errorFraction * 1)),
-//                ]
-//              Atkinson
-//                let errorFraction: Float = Float(sorted[0].difference) / 8
-//                let diffusion: [(Int, Int, Int16)] = [
-//                    (1, 0, Int16(errorFraction)),
-//                    (2, 0, Int16(errorFraction)),
-//                    (-1, 1, Int16(errorFraction)),
-//                    (0, 1, Int16(errorFraction)),
-//                    (1, 1, Int16(errorFraction)),
-//                    (0, 2, Int16(errorFraction)),
-//                    ]
-//              Sierra
-                let errorFraction: Float = Float(sorted[0].difference) / 32
-                let diffusion: [(Int, Int, Int16)] = [
-                    (1, 0, Int16(errorFraction * 5)),
-                    (2, 0, Int16(errorFraction * 3)),
-                    (-2, 1, Int16(errorFraction * 2)),
-                    (-1, 1, Int16(errorFraction * 4)),
-                    (0, 1, Int16(errorFraction * 5)),
-                    (1, 1, Int16(errorFraction * 4)),
-                    (2, 1, Int16(errorFraction * 2)),
-                    (-1, 2, Int16(errorFraction * 2)),
-                    (0, 2, Int16(errorFraction * 3)),
-                    (1, 2, Int16(errorFraction * 2)),
-                    ]
-                for (xOff, yOff, error) in diffusion {
-                    let xTarget = x + xOff
-                    let yTarget = y + yOff
-                    if xTarget >= 0, yTarget >= 0, xTarget < width, yTarget < height {
-                        if offsets[xTarget] == nil {
-                            offsets[xTarget] = [:]
-                        }
-                        let current = offsets[xTarget]?[yTarget] ?? 0
-                        let offset = Int16.addWithOverflow(current, error).0
-                        offsets[xTarget]?[yTarget] = offset
-                    }
+                let error = sorted[0].difference
+                let diffusion = pattern.diffused(error: Float(error), x: x, y: y, width: width, height: height)
+                for point in diffusion {
+                    let arrayPosition = point.xOff + (point.yOff * width)
+                    let start = offsets[arrayPosition]
+                    offsets[arrayPosition] = Int16.addWithOverflow(start, point.error).0
                 }
                 colors[position] = sorted[0].color
             }
         }
-
     }
 
 }
