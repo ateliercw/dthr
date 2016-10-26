@@ -28,4 +28,12 @@ public extension NSGraphicsContext {
         }
         return NSImage(cgImage: cgImage, size: CGSize(width: cgContext.width, height: cgContext.height))
     }
+
+    public func convertToGrayscale(using formula: GrayscaleConversion) -> NSImage {
+        cgContext.convertToGrayscale(using: formula)
+        guard let cgImage = cgContext.makeImage() else {
+            fatalError()
+        }
+        return NSImage(cgImage: cgImage, size: CGSize(width: cgContext.width, height: cgContext.height))
+    }
 }

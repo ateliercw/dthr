@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		269E006A1DC054DA00710A4F /* GrayscaleConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E00691DC054DA00710A4F /* GrayscaleConversion.swift */; };
 		26E5B67F1DBEF9950079224A /* dthr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5B6751DBEF9950079224A /* dthr.framework */; };
 		26E5B6841DBEF9950079224A /* dthrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6831DBEF9950079224A /* dthrTests.swift */; };
 		26E5B6861DBEF9950079224A /* dthr.h in Headers */ = {isa = PBXBuildFile; fileRef = 26E5B6781DBEF9950079224A /* dthr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		269E00691DC054DA00710A4F /* GrayscaleConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrayscaleConversion.swift; sourceTree = "<group>"; };
 		26E5B6751DBEF9950079224A /* dthr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dthr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E5B6781DBEF9950079224A /* dthr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dthr.h; sourceTree = "<group>"; };
 		26E5B6791DBEF9950079224A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				26E5B6971DBEFB480079224A /* NSGraphicsContext+Extension.swift */,
 				26E5B6981DBEFB480079224A /* RGBA.swift */,
 				26E5B6991DBEFB480079224A /* Threshold.swift */,
+				269E00691DC054DA00710A4F /* GrayscaleConversion.swift */,
 			);
 			path = dthr;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				26E5B69D1DBEFB480079224A /* GradientPoint.swift in Sources */,
 				26E5B69E1DBEFB480079224A /* NSGraphicsContext+Extension.swift in Sources */,
 				26E5B69A1DBEFB480079224A /* Collection+Extension.swift in Sources */,
+				269E006A1DC054DA00710A4F /* GrayscaleConversion.swift in Sources */,
 				26E5B6A01DBEFB480079224A /* Threshold.swift in Sources */,
 				26E5B69F1DBEFB480079224A /* RGBA.swift in Sources */,
 			);

@@ -68,7 +68,7 @@ private struct Point<Value> {
 
 public extension CGContext {
 
-    public func dither(allowedColors: [RGBA], pattern: Pattern) {
+    public func dither(allowedColors: [RGBA], pattern: Pattern, using conversion: GrayscaleConversion) {
         guard let bitmap = data else {
             fatalError()
         }
@@ -77,6 +77,7 @@ public extension CGContext {
         offsets.initialize(to: 0, count: width * height)
         defer {
             offsets.deinitialize()
+            offsets.deallocate(capacity: width * height)
         }
         let rowWidth = (bytesPerRow / (bitsPerPixel / 8))
         for y in 0..<height {
@@ -88,10 +89,10 @@ public extension CGContext {
                 let results: [ColorComparison]
                 let currentOffset = offsets[x + errorOffset]
                 if currentOffset != 0 {
-                    results = allowedColors.map(ColorComparison.comparison(to: baseColor, offsetBy: currentOffset))
+                    results = allowedColors.map(ColorComparison.comparison(to: baseColor, using: conversion, offsetBy: currentOffset))
                 }
                 else {
-                    results = allowedColors.map(ColorComparison.comparison(to: baseColor))
+                    results = allowedColors.map(ColorComparison.comparison(to: baseColor, using: conversion))
                 }
                 let sorted = results.sorted(by: ColorComparison.sort)
                 let error = sorted[0].difference

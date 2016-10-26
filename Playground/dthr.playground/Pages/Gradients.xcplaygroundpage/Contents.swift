@@ -6,15 +6,13 @@ let gradientPoints = [GradientPoint(position: 0, color: .white), GradientPoint(p
 guard let newContext = NSGraphicsContext(width: 640, height: 480) else {
     fatalError()
 }
-newContext.saveGraphicsState()
+
 newContext.renderGradient(gradientPoints: gradientPoints) { cgContext in
 }
 
 newContext.renderGradient(gradientPoints: gradientPoints) { cgContext in
     let colors = [0, 255].map(RGBA.init(white:))
-    cgContext.dither(allowedColors: colors, pattern: .floydStienberg)
+    cgContext.dither(allowedColors: colors, pattern: .floydStienberg, using: .bt709)
 }
-
-newContext.restoreGraphicsState()
 
 //: [Next](@next)

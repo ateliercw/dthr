@@ -6,19 +6,8 @@ public struct RGBA {
     var green: UInt8
     var blue: UInt8
 
-    public static let white = RGBA(white: 255)
-    public static let gray = RGBA(white: 127)
-    public static let black = RGBA(white: 0)
-
-    var bt601: UInt8 {
-        let red = Float(self.red) * 0.299
-        let green = Float(self.green) * 0.587
-        let blue = Float(self.blue) * 0.114
-        return UInt8(red + green + blue)
-    }
-
-    func difference(_ other: RGBA) -> Int16 {
-        return Int16(self.bt601) - Int16(other.bt601)
+    func difference(_ other: RGBA, using conversion: GrayscaleConversion) -> Int16 {
+        return Int16.subtractWithOverflow(Int16(conversion.averageFunction(self)), Int16(conversion.averageFunction(other))).0
     }
 
     public init(red: UInt8, green: UInt8, blue: UInt8) {
