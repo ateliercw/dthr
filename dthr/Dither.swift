@@ -1,14 +1,19 @@
 import AppKit
 
-public enum Pattern {
-    case floydStienberg, atkinson, sierra
+public enum DitherPattern {
+    case floydStienberg, jarvisJudiceNink, stucki, atkinson, burkes, sierraThree, sierraTwo, sierraLite
 
     private var divisor: Float {
         let divisor: Float
         switch self {
         case .floydStienberg: divisor = 16
+        case .jarvisJudiceNink: divisor = 48
+        case .stucki: divisor = 42
         case .atkinson: divisor = 8
-        case .sierra: divisor = 32
+        case .burkes: divisor = 32
+        case .sierraThree: divisor = 32
+        case .sierraTwo: divisor = 16
+        case .sierraLite: divisor = 4
         }
         return divisor
     }
@@ -23,6 +28,36 @@ public enum Pattern {
                 Point(xOff: 0, yOff: 1, error: 5),
                 Point(xOff: 1, yOff: 1, error: 1),
             ]
+        case .jarvisJudiceNink:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 7),
+                Point(xOff: 2, yOff: 0, error: 5),
+                Point(xOff: -2, yOff: 1, error: 3),
+                Point(xOff: -1, yOff: 1, error: 5),
+                Point(xOff: 0, yOff: 1, error: 7),
+                Point(xOff: 1, yOff: 1, error: 5),
+                Point(xOff: 2, yOff: 1, error: 3),
+                Point(xOff: -2, yOff: 2, error: 1),
+                Point(xOff: -1, yOff: 2, error: 3),
+                Point(xOff: 0, yOff: 2, error: 5),
+                Point(xOff: 1, yOff: 2, error: 3),
+                Point(xOff: 2, yOff: 2, error: 1),
+            ]
+        case .stucki:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 8),
+                Point(xOff: 2, yOff: 0, error: 4),
+                Point(xOff: -2, yOff: 1, error: 2),
+                Point(xOff: -1, yOff: 1, error: 4),
+                Point(xOff: 0, yOff: 1, error: 8),
+                Point(xOff: 1, yOff: 1, error: 4),
+                Point(xOff: 2, yOff: 1, error: 2),
+                Point(xOff: -2, yOff: 2, error: 1),
+                Point(xOff: -1, yOff: 2, error: 2),
+                Point(xOff: 0, yOff: 2, error: 4),
+                Point(xOff: 1, yOff: 2, error: 2),
+                Point(xOff: 2, yOff: 2, error: 1),
+            ]
         case .atkinson:
             points = [
                 Point(xOff: 1, yOff: 0, error: 1),
@@ -32,7 +67,17 @@ public enum Pattern {
                 Point(xOff: 1, yOff: 1, error: 1),
                 Point(xOff: 0, yOff: 2, error: 1),
             ]
-        case .sierra:
+        case .burkes:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 8),
+                Point(xOff: 2, yOff: 0, error: 4),
+                Point(xOff: -2, yOff: 1, error: 2),
+                Point(xOff: -1, yOff: 1, error: 4),
+                Point(xOff: 0, yOff: 1, error: 8),
+                Point(xOff: 1, yOff: 1, error: 4),
+                Point(xOff: 2, yOff: 1, error: 2),
+            ]
+        case .sierraThree:
             points = [
                 Point(xOff: 1, yOff: 0, error: 5),
                 Point(xOff: 2, yOff: 0, error: 3),
@@ -45,7 +90,24 @@ public enum Pattern {
                 Point(xOff: 0, yOff: 2, error: 3),
                 Point(xOff: 1, yOff: 2, error: 2),
             ]
+        case .sierraTwo:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 4),
+                Point(xOff: 2, yOff: 0, error: 3),
+                Point(xOff: -2, yOff: 1, error: 1),
+                Point(xOff: -1, yOff: 1, error: 2),
+                Point(xOff: 0, yOff: 1, error: 3),
+                Point(xOff: 1, yOff: 1, error: 2),
+                Point(xOff: 2, yOff: 1, error: 1),
+            ]
+        case .sierraLite:
+            points = [
+                Point(xOff: 1, yOff: 0, error: 2),
+                Point(xOff: -1, yOff: 1, error: 1),
+                Point(xOff: 0, yOff: 1, error: 1),
+            ]
         }
+
         return points
     }
 
@@ -68,7 +130,7 @@ private struct Point<Value> {
 
 public extension CGContext {
 
-    public func dither(allowedColors: [RGBA], pattern: Pattern, using conversion: GrayscaleConversion) {
+    public func dither(allowedColors: [RGBA], pattern: DitherPattern, using conversion: GrayscaleConversion) {
         guard let bitmap = data else {
             fatalError()
         }

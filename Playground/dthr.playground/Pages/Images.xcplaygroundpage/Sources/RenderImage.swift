@@ -1,7 +1,7 @@
 import AppKit
 import dthr
 
-public func renderImage(named: String, using pattern: dthr.Pattern, with conversion: GrayscaleConversion) -> (NSImage, NSImage) {
+public func renderImage(named: String, using pattern: DitherPattern, with conversion: GrayscaleConversion) -> (NSImage, NSImage) {
     guard let initial = NSImage(named: named) else {
         fatalError()
     }
