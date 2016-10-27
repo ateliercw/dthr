@@ -12,7 +12,7 @@
 		26E5B6841DBEF9950079224A /* dthrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6831DBEF9950079224A /* dthrTests.swift */; };
 		26E5B6861DBEF9950079224A /* dthr.h in Headers */ = {isa = PBXBuildFile; fileRef = 26E5B6781DBEF9950079224A /* dthr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26E5B69A1DBEFB480079224A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6931DBEFB480079224A /* Collection+Extension.swift */; };
-		26E5B69B1DBEFB480079224A /* ColorComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6941DBEFB480079224A /* ColorComparison.swift */; };
+		26E5B69B1DBEFB480079224A /* AveragedComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6941DBEFB480079224A /* AveragedComparison.swift */; };
 		26E5B69C1DBEFB480079224A /* Dither.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6951DBEFB480079224A /* Dither.swift */; };
 		26E5B69D1DBEFB480079224A /* GradientPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6961DBEFB480079224A /* GradientPoint.swift */; };
 		26E5B69E1DBEFB480079224A /* NSGraphicsContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6971DBEFB480079224A /* NSGraphicsContext+Extension.swift */; };
@@ -40,7 +40,7 @@
 		26E5B6851DBEF9950079224A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26E5B6911DBEFAC80079224A /* dthr.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = dthr.playground; sourceTree = "<group>"; };
 		26E5B6931DBEFB480079224A /* Collection+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
-		26E5B6941DBEFB480079224A /* ColorComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorComparison.swift; sourceTree = "<group>"; };
+		26E5B6941DBEFB480079224A /* AveragedComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AveragedComparison.swift; sourceTree = "<group>"; };
 		26E5B6951DBEFB480079224A /* Dither.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dither.swift; sourceTree = "<group>"; };
 		26E5B6961DBEFB480079224A /* GradientPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientPoint.swift; sourceTree = "<group>"; };
 		26E5B6971DBEFB480079224A /* NSGraphicsContext+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSGraphicsContext+Extension.swift"; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			children = (
 				26E5B68F1DBEFA7B0079224A /* Assets */,
 				26E5B6931DBEFB480079224A /* Collection+Extension.swift */,
-				26E5B6941DBEFB480079224A /* ColorComparison.swift */,
+				26E5B6941DBEFB480079224A /* AveragedComparison.swift */,
 				26E5B6951DBEFB480079224A /* Dither.swift */,
 				26E5B6961DBEFB480079224A /* GradientPoint.swift */,
 				26E5B6971DBEFB480079224A /* NSGraphicsContext+Extension.swift */,
@@ -267,7 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26E5B69C1DBEFB480079224A /* Dither.swift in Sources */,
-				26E5B69B1DBEFB480079224A /* ColorComparison.swift in Sources */,
+				26E5B69B1DBEFB480079224A /* AveragedComparison.swift in Sources */,
 				26E5B69D1DBEFB480079224A /* GradientPoint.swift in Sources */,
 				26E5B69E1DBEFB480079224A /* NSGraphicsContext+Extension.swift in Sources */,
 				26E5B69A1DBEFB480079224A /* Collection+Extension.swift in Sources */,

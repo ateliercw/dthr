@@ -9,6 +9,10 @@ public func renderImage(named: String, using pattern: DitherPattern, with conver
     guard let ctx = NSGraphicsContext(width: Int(initial.size.width), height: Int(initial.size.height)) else {
         fatalError()
     }
+    ctx.saveGraphicsState()
+    defer {
+        ctx.restoreGraphicsState()
+    }
 
     guard let cgImage = initial.cgImage(forProposedRect: nil, context: ctx, hints: nil) else {
         fatalError()

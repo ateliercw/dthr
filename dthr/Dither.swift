@@ -131,32 +131,27 @@ private struct Point<Value> {
 public extension CGContext {
 
     public func dither(allowedColors: [RGBA], pattern: DitherPattern, using conversion: GrayscaleConversion) {
-        guard let bitmap = data else {
+        guard let colors = data?.bindMemory(to: RGBA.self, capacity: width * height) else {
             fatalError()
         }
-        let colors = bitmap.bindMemory(to: RGBA.self, capacity: width * height)
         let offsets = UnsafeMutablePointer<Int16>.allocate(capacity: width * height)
         offsets.initialize(to: 0, count: width * height)
         defer {
             offsets.deinitialize()
             offsets.deallocate(capacity: width * height)
         }
+        let comparisons = allowedColors.map(AveragedColor.averager(using: conversion))
         let rowWidth = (bytesPerRow / (bitsPerPixel / 8))
         for y in 0..<height {
             let rowOffset = rowWidth * y
             let errorOffset = y * width
             for x in 0..<width {
                 let position = x + rowOffset
-                let baseColor: RGBA = colors[position]
-                let results: [ColorComparison]
+                let average = conversion.averageFunction(colors[position])
+                let averagedColor = AveragedColor(color: colors[position], average: average)
                 let currentOffset = offsets[x + errorOffset]
-                if currentOffset != 0 {
-                    results = allowedColors.map(ColorComparison.comparison(to: baseColor, using: conversion, offsetBy: currentOffset))
-                }
-                else {
-                    results = allowedColors.map(ColorComparison.comparison(to: baseColor, using: conversion))
-                }
-                let sorted = results.sorted(by: ColorComparison.sort)
+                let results = comparisons.map(AveragedComparison.comparison(to: averagedColor, offsetBy: currentOffset))
+                let sorted = results.sorted(by: AveragedComparison.sort)
                 let error = sorted[0].difference
                 let diffusion = pattern.diffused(error: Float(error), x: x, y: y, width: width, height: height)
                 for point in diffusion {
@@ -164,7 +159,7 @@ public extension CGContext {
                     let start = offsets[arrayPosition]
                     offsets[arrayPosition] = Int16.addWithOverflow(start, point.error).0
                 }
-                colors[position] = sorted[0].color
+                colors[position] = sorted[0].averagedColor.color
             }
         }
     }
