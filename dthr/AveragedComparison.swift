@@ -18,9 +18,9 @@ struct AveragedComparison {
 
     static func comparison(to color: AveragedColor, offsetBy: Int16) -> (AveragedColor) -> AveragedComparison {
         return { otherColor in
-            let difference = Int16.subtractWithOverflow(Int16(color.average), Int16(otherColor.average)).0
-            let offset = Int16.addWithOverflow(difference, offsetBy).0
-            return AveragedComparison(averagedColor: otherColor, difference: Int16(offset))
+            let difference = Int16(color.average) &- Int16(otherColor.average)
+            let offset = difference &+ offsetBy
+            return AveragedComparison(averagedColor: otherColor, difference: offset)
         }
     }
 

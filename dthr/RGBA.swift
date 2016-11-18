@@ -7,7 +7,7 @@ public struct RGBA {
     var blue: UInt8
 
     func difference(_ other: RGBA, using conversion: GrayscaleConversion) -> Int16 {
-        return Int16.subtractWithOverflow(Int16(conversion.averageFunction(self)), Int16(conversion.averageFunction(other))).0
+        return Int16(conversion.averageFunction(self)) &- Int16(conversion.averageFunction(other))
     }
 
     public init(red: UInt8, green: UInt8, blue: UInt8) {

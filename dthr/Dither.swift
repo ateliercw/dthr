@@ -2,8 +2,10 @@ import AppKit
 
 public enum DitherPattern {
     case floydStienberg, jarvisJudiceNink, stucki, atkinson, burkes, sierraThree, sierraTwo, sierraLite
+}
 
-    private var divisor: Float {
+private extension DitherPattern {
+    var divisor: Float {
         let divisor: Float
         switch self {
         case .floydStienberg: divisor = 16
@@ -18,7 +20,7 @@ public enum DitherPattern {
         return divisor
     }
 
-    fileprivate var pattern: [Point<Float>] {
+    var pattern: [Point<Float>] {
         let points: [Point<Float>]
         switch self {
         case .floydStienberg:
@@ -111,7 +113,7 @@ public enum DitherPattern {
         return points
     }
 
-    fileprivate func diffused(error: Float, x: Int, y: Int, width: Int, height: Int) -> [Point<Int16>] {
+    func diffused(error: Float, x: Int, y: Int, width: Int, height: Int) -> [Point<Int16>] {
         let errorPoint = error / divisor
         return pattern.flatMap { initialPoint in
             let finalX = x + initialPoint.xOff
@@ -157,7 +159,7 @@ public extension CGContext {
                 for point in diffusion {
                     let arrayPosition = point.xOff + (point.yOff * width)
                     let start = offsets[arrayPosition]
-                    offsets[arrayPosition] = Int16.addWithOverflow(start, point.error).0
+                    offsets[arrayPosition] = start &+ point.error
                 }
                 colors[position] = sorted[0].averagedColor.color
             }

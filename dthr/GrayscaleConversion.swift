@@ -53,7 +53,6 @@ public extension CGContext {
 
 }
 
-
 private func min(_ a: UInt8, _ b: UInt8, _ c: UInt8) -> UInt8 {
     return min(min(a, b), c)
 }
@@ -105,8 +104,7 @@ private extension GrayscaleConversion {
             let red = Float(color.red) * rMult
             let green = Float(color.green) * gMult
             let blue = Float(color.blue) * bMult
-            let rPlusG = UInt8.addWithOverflow(UInt8(red), UInt8(green)).0
-            let rPlusGplusB = UInt8.addWithOverflow(rPlusG, UInt8(blue)).0
+            let rPlusGplusB = UInt8(red) &+ UInt8(green) &+ UInt8(blue)
             return rPlusGplusB
         }
     }

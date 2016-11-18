@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		269E006A1DC054DA00710A4F /* GrayscaleConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E00691DC054DA00710A4F /* GrayscaleConversion.swift */; };
+		26CFADED1DC2F82600F51ED3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFADEC1DC2F82600F51ED3 /* main.swift */; };
+		26CFADF91DC2FA9500F51ED3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFADEC1DC2F82600F51ED3 /* main.swift */; };
+		26CFADFA1DC2FAD900F51ED3 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6931DBEFB480079224A /* Collection+Extension.swift */; };
+		26CFADFB1DC2FAD900F51ED3 /* AveragedComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6941DBEFB480079224A /* AveragedComparison.swift */; };
+		26CFADFC1DC2FAD900F51ED3 /* Dither.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6951DBEFB480079224A /* Dither.swift */; };
+		26CFADFD1DC2FAD900F51ED3 /* GradientPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6961DBEFB480079224A /* GradientPoint.swift */; };
+		26CFADFE1DC2FAD900F51ED3 /* NSGraphicsContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6971DBEFB480079224A /* NSGraphicsContext+Extension.swift */; };
+		26CFADFF1DC2FAD900F51ED3 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6981DBEFB480079224A /* RGBA.swift */; };
+		26CFAE001DC2FAD900F51ED3 /* Threshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6991DBEFB480079224A /* Threshold.swift */; };
+		26CFAE011DC2FAD900F51ED3 /* GrayscaleConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E00691DC054DA00710A4F /* GrayscaleConversion.swift */; };
 		26E5B67F1DBEF9950079224A /* dthr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5B6751DBEF9950079224A /* dthr.framework */; };
 		26E5B6841DBEF9950079224A /* dthrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B6831DBEF9950079224A /* dthrTests.swift */; };
 		26E5B6861DBEF9950079224A /* dthr.h in Headers */ = {isa = PBXBuildFile; fileRef = 26E5B6781DBEF9950079224A /* dthr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,8 +40,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		26CFADE81DC2F82600F51ED3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		269E00691DC054DA00710A4F /* GrayscaleConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrayscaleConversion.swift; sourceTree = "<group>"; };
+		26CFADEA1DC2F82600F51ED3 /* dthr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dthr; sourceTree = BUILT_PRODUCTS_DIR; };
+		26CFADEC1DC2F82600F51ED3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		26E5B6751DBEF9950079224A /* dthr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dthr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E5B6781DBEF9950079224A /* dthr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dthr.h; sourceTree = "<group>"; };
 		26E5B6791DBEF9950079224A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +73,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		26CFADE71DC2F82600F51ED3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26E5B6711DBEF9950079224A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -67,12 +98,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26CFADEB1DC2F82600F51ED3 /* dthr-cli */ = {
+			isa = PBXGroup;
+			children = (
+				26CFADEC1DC2F82600F51ED3 /* main.swift */,
+			);
+			path = "dthr-cli";
+			sourceTree = "<group>";
+		};
 		26E5B66B1DBEF9950079224A = {
 			isa = PBXGroup;
 			children = (
 				26E5B6771DBEF9950079224A /* dthr */,
 				26E5B6821DBEF9950079224A /* dthrTests */,
 				26E5B6921DBEFACE0079224A /* Playground */,
+				26CFADEB1DC2F82600F51ED3 /* dthr-cli */,
 				26E5B6761DBEF9950079224A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +122,7 @@
 			children = (
 				26E5B6751DBEF9950079224A /* dthr.framework */,
 				26E5B67E1DBEF9950079224A /* dthrTests.xctest */,
+				26CFADEA1DC2F82600F51ED3 /* dthr */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +191,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		26CFADE91DC2F82600F51ED3 /* dthr-cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26CFADF01DC2F82600F51ED3 /* Build configuration list for PBXNativeTarget "dthr-cli" */;
+			buildPhases = (
+				26CFADE61DC2F82600F51ED3 /* Sources */,
+				26CFADE71DC2F82600F51ED3 /* Frameworks */,
+				26CFADE81DC2F82600F51ED3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "dthr-cli";
+			productName = "dthr-cli";
+			productReference = 26CFADEA1DC2F82600F51ED3 /* dthr */;
+			productType = "com.apple.product-type.tool";
+		};
 		26E5B6741DBEF9950079224A /* dthr */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26E5B6891DBEF9950079224A /* Build configuration list for PBXNativeTarget "dthr" */;
@@ -193,10 +251,15 @@
 		26E5B66C1DBEF9950079224A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Michael Skiba";
 				TargetAttributes = {
+					26CFADE91DC2F82600F51ED3 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8NQ6VJNLCQ;
+						ProvisioningStyle = Automatic;
+					};
 					26E5B6741DBEF9950079224A = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 8NQ6VJNLCQ;
@@ -224,6 +287,7 @@
 			targets = (
 				26E5B6741DBEF9950079224A /* dthr */,
 				26E5B67D1DBEF9950079224A /* dthrTests */,
+				26CFADE91DC2F82600F51ED3 /* dthr-cli */,
 			);
 		};
 /* End PBXProject section */
@@ -262,12 +326,29 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		26CFADE61DC2F82600F51ED3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26CFADFB1DC2FAD900F51ED3 /* AveragedComparison.swift in Sources */,
+				26CFADED1DC2F82600F51ED3 /* main.swift in Sources */,
+				26CFADFA1DC2FAD900F51ED3 /* Collection+Extension.swift in Sources */,
+				26CFADFD1DC2FAD900F51ED3 /* GradientPoint.swift in Sources */,
+				26CFADFC1DC2FAD900F51ED3 /* Dither.swift in Sources */,
+				26CFADFE1DC2FAD900F51ED3 /* NSGraphicsContext+Extension.swift in Sources */,
+				26CFADFF1DC2FAD900F51ED3 /* RGBA.swift in Sources */,
+				26CFAE011DC2FAD900F51ED3 /* GrayscaleConversion.swift in Sources */,
+				26CFAE001DC2FAD900F51ED3 /* Threshold.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26E5B6701DBEF9950079224A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				26E5B69C1DBEFB480079224A /* Dither.swift in Sources */,
 				26E5B69B1DBEFB480079224A /* AveragedComparison.swift in Sources */,
+				26CFADF91DC2FA9500F51ED3 /* main.swift in Sources */,
 				26E5B69D1DBEFB480079224A /* GradientPoint.swift in Sources */,
 				26E5B69E1DBEFB480079224A /* NSGraphicsContext+Extension.swift in Sources */,
 				26E5B69A1DBEFB480079224A /* Collection+Extension.swift in Sources */,
@@ -296,6 +377,25 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		26CFADEE1DC2F82600F51ED3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8NQ6VJNLCQ;
+				PRODUCT_NAME = dthr;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		26CFADEF1DC2F82600F51ED3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8NQ6VJNLCQ;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				PRODUCT_NAME = dthr;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		26E5B6871DBEF9950079224A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -314,6 +414,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -366,6 +467,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -468,6 +570,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		26CFADF01DC2F82600F51ED3 /* Build configuration list for PBXNativeTarget "dthr-cli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26CFADEE1DC2F82600F51ED3 /* Debug */,
+				26CFADEF1DC2F82600F51ED3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		26E5B66F1DBEF9950079224A /* Build configuration list for PBXProject "dthr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
