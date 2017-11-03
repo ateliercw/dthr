@@ -10,8 +10,8 @@ public extension NSGraphicsContext {
                                             samplesPerPixel: 4,
                                             hasAlpha: true,
                                             isPlanar: false,
-                                            colorSpaceName: NSDeviceRGBColorSpace,
-                                            bitmapFormat: .alphaFirst,
+                                            colorSpaceName: NSColorSpaceName.deviceRGB,
+                                            bitmapFormat: NSBitmapImageRep.Format.alphaFirst,
                                             bytesPerRow: 0,
                                             bitsPerPixel: 0) else {
                                                 fatalError()

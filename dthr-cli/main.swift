@@ -48,7 +48,7 @@ let dithered = render(image, using: .atkinson, with: .bt601)
 dithered.lockFocus()
 let ditheredRep = NSBitmapImageRep.init(focusedViewRect: NSRect(origin: CGPoint(), size: dithered.size))
 dithered.unlockFocus()
-guard let data = ditheredRep?.representation(using: NSPNGFileType, properties: [:]) else {
+guard let data = ditheredRep?.representation(using: NSBitmapImageRep.FileType.png, properties: [:]) else {
     fatalError("Failed to create png")
 }
 do {

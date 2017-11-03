@@ -10,7 +10,7 @@ newContext.saveGraphicsState()
 defer {
     newContext.restoreGraphicsState()
 }
-newContext.renderGradient(gradientPoints: gradientPoints) { cgContext in
+newContext.renderGradient(gradientPoints: gradientPoints) { _ in
 }
 
 newContext.renderGradient(gradientPoints: gradientPoints) { cgContext in
@@ -22,5 +22,7 @@ newContext.renderGradient(gradientPoints: gradientPoints) { cgContext in
     let colors = [0, 255].map(RGBA.init(white:))
     cgContext.dither(allowedColors: colors, pattern: .floydStienberg, using: .bt709)
 }
+
+newContext
 
 //: [Next](@next)

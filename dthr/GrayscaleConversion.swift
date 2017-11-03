@@ -9,8 +9,15 @@
 import Foundation
 
 public enum GrayscaleConversion {
-
-    case linear, hsl, perceptual, bt601, bt709, decomposeMax, decomposeMin, custom(rMult: Float, gMult: Float, bMult: Float), other(conversion: (RGBA) -> UInt8)
+    case linear
+    case hsl
+    case perceptual
+    case bt601
+    case bt709
+    case decomposeMax
+    case decomposeMin
+    case custom(rMult: Float, gMult: Float, bMult: Float)
+    case other(conversion: (RGBA) -> UInt8)
 
     public var averageFunction: ((RGBA) -> UInt8) {
         let averageFunction: (RGBA) -> UInt8
@@ -62,7 +69,6 @@ private func max(_ a: UInt8, _ b: UInt8, _ c: UInt8) -> UInt8 {
 }
 
 private extension GrayscaleConversion {
-
     struct Formulas {
         static func linear(color: RGBA) -> UInt8 {
             return UInt8((UInt16(color.red) + UInt16(color.blue) + UInt16(color.green)) / 3)
@@ -108,5 +114,4 @@ private extension GrayscaleConversion {
             return rPlusGplusB
         }
     }
-
 }

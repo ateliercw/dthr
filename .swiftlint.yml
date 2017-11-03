@@ -14,6 +14,9 @@ disabled_rules:
 type_name:
   min_length: 2
 
+trailing_comma:
+  mandatory_comma: true
+
 variable_name:
     excluded:
         - URL
